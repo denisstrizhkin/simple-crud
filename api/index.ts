@@ -28,9 +28,8 @@ app.delete("/products/:id", deleteProduct);
 
 const start = async () => {
     try {
-        await mongoose.connect(
-            `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOST}:${MONGO_PORT}/mongoose`,
-        );
+        const mongoStr = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOST}:${MONGO_PORT}`;
+        await mongoose.connect(mongoStr);
         app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
     } catch (error) {
         console.error(error);
