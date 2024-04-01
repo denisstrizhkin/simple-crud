@@ -17,8 +17,18 @@ services:
       - 3000:80
     volumes:
       - ./api:/app
-      - node_modules:/api/node_modules
+      - node_modules_api:/app/node_modules
+  front:
+    depends_on:
+      - api
+    build: ./spa
+    ports:
+      - 3080:3000
+    volumes:
+      - ./spa:/app
+      - node_modules_front:/app/node_modules
 
 volumes:
   db:
-  node_modules:
+  node_modules_api:
+  node_modules_front:
