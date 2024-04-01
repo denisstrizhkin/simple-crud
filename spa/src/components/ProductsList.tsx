@@ -1,5 +1,5 @@
-import React, { SetStateAction, useEffect, useState } from "react";
-import Product from "./models/Product";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import Product from "../models/Product";
 
 interface ProductProps {
   product: Product;
@@ -7,7 +7,7 @@ interface ProductProps {
 
 function ProductCard({ product }: ProductProps) {
   return (
-    <div className="Product">
+    <div className="ProductCard">
       <h3>{product.name}</h3>
       <p>Цена: {product.price}Р</p>
       <p>Количество: {product.quantity}</p>
@@ -17,10 +17,11 @@ function ProductCard({ product }: ProductProps) {
 
 interface ProductsListProps {
   url: string;
-  setSelectedId: React.Dispatch<SetStateAction<string | null>>;
+  setSelectedId: Dispatch<SetStateAction<string | null>>;
+  setDisplay: Dispatch<SetStateAction<Display>>;
 }
 
-function ProductsList({ url, setSelectedId }: ProductsListProps) {
+function ProductsList({ url, setSelectedId, setDisplay }: ProductsListProps) {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -40,11 +41,18 @@ function ProductsList({ url, setSelectedId }: ProductsListProps) {
       });
   }, [products]);
 
+  const addButtonClicked = () => {
+    setDisplay("add");
+  };
+
   return (
     <div className="ProductsList">
-      {products.map((product) => (
-        <ProductCard product={product} />
-      ))}
+      <div className="ProductsContainer">
+        {products.map((product) => (
+          <ProductCard product={product} />
+        ))}
+      </div>
+      <button onClick={addButtonClicked}>Добавить</button>
     </div>
   );
 }
