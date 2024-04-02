@@ -3,11 +3,18 @@ import Product from "../models/Product";
 
 interface ProductProps {
   product: Product;
+  setSelectedId: Dispatch<SetStateAction<string | undefined>>;
+  setDisplay: Dispatch<SetStateAction<Display>>;
 }
 
-function ProductCard({ product }: ProductProps) {
+function ProductCard({ product, setSelectedId, setDisplay }: ProductProps) {
+  const cardClicked = () => {
+    setSelectedId(product._id);
+    setDisplay("single");
+  };
+
   return (
-    <div className="ProductCard">
+    <div className="ProductCard" onClick={cardClicked}>
       <h3>{product.name}</h3>
       <p>Цена: {product.price}Р</p>
       <p>Количество: {product.quantity}</p>
@@ -49,7 +56,12 @@ function ProductsList({ url, setSelectedId, setDisplay }: ProductsListProps) {
     <div className="ProductsList">
       <div className="ProductsContainer">
         {products.map((product) => (
-          <ProductCard key={product._id} product={product} />
+          <ProductCard
+            key={product._id}
+            product={product}
+            setSelectedId={setSelectedId}
+            setDisplay={setDisplay}
+          />
         ))}
       </div>
       <button onClick={addButtonClicked}>Добавить</button>

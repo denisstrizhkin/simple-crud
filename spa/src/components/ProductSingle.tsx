@@ -26,7 +26,7 @@ function ProductSingle({
 
   useEffect(() => {
     if (isCreate) return;
-    fetch(url)
+    fetch(url + "/" + selectedId)
       .then((response) => {
         if (!response.ok) {
           console.error(response);
@@ -48,7 +48,25 @@ function ProductSingle({
 
   const btnDeleteClicked = () => {};
 
-  const btnUpdateClicked = () => {};
+  const btnUpdateClicked = () => {
+    fetch(url + "/" + selectedId, {
+      method: "PUT",
+      body: JSON.stringify(product),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.error(response);
+          return;
+        }
+        setDisplay("list");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   const btnAddClicked = () => {
     fetch(url, {
@@ -63,7 +81,6 @@ function ProductSingle({
           console.error(response);
           return;
         }
-        console.log(response.json());
         setDisplay("list");
       })
       .catch((error) => {
