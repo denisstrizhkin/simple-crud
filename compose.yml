@@ -27,6 +27,23 @@ services:
     volumes:
       - ./spa:/app
       - node_modules_front:/app/node_modules
+  php:
+    depends_on:
+      - api
+    image: php:fpm
+    environment:
+      API_URL: "http://api:80"
+    volumes:
+      - ./web:/app
+  web:
+    depends_on:
+      - php
+    image: nginx
+    ports:
+      - "3380:80"
+    volumes:
+      - ./web:/app
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
 
 volumes:
   db:
