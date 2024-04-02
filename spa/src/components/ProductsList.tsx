@@ -15,6 +15,7 @@ function ProductCard({ product, setSelectedId, setDisplay }: ProductProps) {
 
   return (
     <div className="ProductCard" onClick={cardClicked}>
+      <img src={product.image} />
       <h3>{product.name}</h3>
       <p>Цена: {product.price}Р</p>
       <p>Количество: {product.quantity}</p>
@@ -46,7 +47,7 @@ function ProductsList({ url, setSelectedId, setDisplay }: ProductsListProps) {
       .catch((error) => {
         console.error(error);
       });
-  }, [products]);
+  }, []);
 
   const addButtonClicked = () => {
     setDisplay("add");
