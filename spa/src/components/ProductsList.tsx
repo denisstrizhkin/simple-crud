@@ -17,8 +17,8 @@ function ProductCard({ product, setSelectedId, setDisplay }: ProductProps) {
     <div className="ProductCard" onClick={cardClicked}>
       <img src={product.image} />
       <h3>{product.name}</h3>
-      <p>Цена: {product.price}Р</p>
-      <p>Количество: {product.quantity}</p>
+      <p>Price: {product.price}</p>
+      <p>Quantity: {product.quantity}</p>
     </div>
   );
 }
@@ -65,7 +65,7 @@ function ProductsList({ url, setSelectedId, setDisplay }: ProductsListProps) {
           />
         ))}
       </div>
-      <button onClick={addButtonClicked}>Добавить</button>
+      <button onClick={addButtonClicked}>Add</button>
     </div>
   );
 }
