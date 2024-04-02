@@ -74,13 +74,40 @@ function ProductSingle({
   return (
     <div className="ProductSingle">
       <label htmlFor="name">Name</label>
-      <input type="text" name="name" value={product.name} />
+      <input
+        type="text"
+        name="name"
+        value={product.name}
+        onChange={(ev) => {
+          let tmp = { ...product };
+          tmp.name = ev.target.value;
+          setProduct(tmp);
+        }}
+      />
 
       <label htmlFor="price">Price</label>
-      <input type="number" name="price" value={product.price} />
+      <input
+        type="number"
+        name="price"
+        value={product.price}
+        onChange={(ev) => {
+          let tmp = { ...product };
+          tmp.price = Number(ev.target.value);
+          setProduct(tmp);
+        }}
+      />
 
       <label htmlFor="quantity">Quantity</label>
-      <input type="number" name="quantity" value={product.quantity} />
+      <input
+        type="number"
+        name="quantity"
+        value={product.quantity}
+        onChange={(ev) => {
+          let tmp = { ...product };
+          tmp.quantity = Number.parseFloat(ev.target.value);
+          setProduct(tmp);
+        }}
+      />
 
       {isCreate ? <button onClick={btnAddClicked}>Add</button> : null}
       {!isCreate ? <button onClick={btnUpdateClicked}>Update</button> : null}

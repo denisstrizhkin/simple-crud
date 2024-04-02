@@ -17,6 +17,7 @@
   align-items: center;
   justify-content: center;
   border: 2px dashed black;
+  padding: 1em;
 }
 
 .ProductCard:hover {
@@ -40,7 +41,7 @@
 }
 
 button {
-  font-size: 1.25rem;
+  font-size: 1rem;
   background: black;
   color: white;
   padding: 0.5em 1em;
@@ -56,4 +57,9 @@ button:hover {
 button:active {
   background: black;
   color: white;
+}
+
+input {
+  margin-top: 0.5em;
+  margin-bottom: 1em;
 }
