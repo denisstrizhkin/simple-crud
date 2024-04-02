@@ -47,7 +47,21 @@ function ProductSingle({
     setDisplay("list");
   };
 
-  const btnDeleteClicked = () => {};
+  const btnDeleteClicked = () => {
+    fetch(url + "/" + product._id, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.error(response);
+          return;
+        }
+        setDisplay("list");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   const btnUpdateClicked = () => {
     fetch(url + "/" + selectedId, {
