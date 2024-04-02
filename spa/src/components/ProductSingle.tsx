@@ -6,7 +6,7 @@ const defaultImg: string = "";
 interface ProductSingleProps {
   isCreate: boolean;
   url: string;
-  selectedId: string;
+  selectedId: string | undefined;
   setDisplay: React.Dispatch<SetStateAction<Display>>;
 }
 
@@ -17,7 +17,7 @@ function ProductSingle({
   setDisplay,
 }: ProductSingleProps) {
   const [product, setProduct] = useState<Product>({
-    _id: "",
+    _id: undefined,
     name: "Name",
     quantity: 0,
     price: 0,
@@ -46,6 +46,31 @@ function ProductSingle({
     setDisplay("list");
   };
 
+  const btnDeleteClicked = () => {};
+
+  const btnUpdateClicked = () => {};
+
+  const btnAddClicked = () => {
+    fetch(url, {
+      method: "POST",
+      body: JSON.stringify(product),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.error(response);
+          return;
+        }
+        console.log(response.json());
+        setDisplay("list");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <div className="ProductSingle">
       <label htmlFor="name">Name</label>
@@ -57,10 +82,10 @@ function ProductSingle({
       <label htmlFor="quantity">Quantity</label>
       <input type="number" name="quantity" value={product.quantity} />
 
-      {isCreate ? <button onClick={btnBackClicked}>Добавить</button> : null}
-      {!isCreate ? <button onClick={btnBackClicked}>Изменить</button> : null}
-      {!isCreate ? <button onClick={btnBackClicked}>Удалить</button> : null}
-      <button onClick={btnBackClicked}>Назад</button>
+      {isCreate ? <button onClick={btnAddClicked}>Add</button> : null}
+      {!isCreate ? <button onClick={btnUpdateClicked}>Update</button> : null}
+      {!isCreate ? <button onClick={btnDeleteClicked}>Delete</button> : null}
+      <button onClick={btnBackClicked}>Back</button>
     </div>
   );
 }

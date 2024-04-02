@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import ProductsList from "./components/ProductsList";
 import ProductSingle from "./components/ProductSingle";
 
 function App() {
   const url: string = "http://localhost:3000/products";
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [selectedId, setSelectedId] = useState<string | undefined>(undefined);
   const [display, setDisplay] = useState<Display>("list");
 
   const switchDisplay = (d: Display) => {
@@ -20,10 +20,22 @@ function App() {
         );
       case "add":
         return (
-          <ProductSingle url={url} isCreate={true} setDisplay={setDisplay} />
+          <ProductSingle
+            url={url}
+            isCreate={true}
+            selectedId={selectedId}
+            setDisplay={setDisplay}
+          />
         );
       case "single":
-        return <ProductSingle url={url} setDisplay={setDisplay} />;
+        return (
+          <ProductSingle
+            url={url}
+            isCreate={false}
+            selectedId={selectedId}
+            setDisplay={setDisplay}
+          />
+        );
     }
   };
 

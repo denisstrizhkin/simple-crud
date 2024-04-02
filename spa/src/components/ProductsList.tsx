@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Product from "../models/Product";
 
 interface ProductProps {
@@ -17,7 +17,7 @@ function ProductCard({ product }: ProductProps) {
 
 interface ProductsListProps {
   url: string;
-  setSelectedId: Dispatch<SetStateAction<string | null>>;
+  setSelectedId: Dispatch<SetStateAction<string | undefined>>;
   setDisplay: Dispatch<SetStateAction<Display>>;
 }
 
@@ -49,7 +49,7 @@ function ProductsList({ url, setSelectedId, setDisplay }: ProductsListProps) {
     <div className="ProductsList">
       <div className="ProductsContainer">
         {products.map((product) => (
-          <ProductCard product={product} />
+          <ProductCard key={product._id} product={product} />
         ))}
       </div>
       <button onClick={addButtonClicked}>Добавить</button>
